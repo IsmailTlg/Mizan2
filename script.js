@@ -253,22 +253,70 @@ ressayerBtn.addEventListener("click", function(){
 //////////START OF PART 2 
 async function request(path, options = {}){
     const baseUrl = "http://localhost:3000"
+    const controller = new AbortController()
     const config = {
         method: 'GET',
         ...options,
         headers: {
             'Content-Type' : 'application/json',
             ...options.headers
-        }
+        },
+        signal: controller.signal
     }
     if(config.body && typeof config.body === 'object'){
         config.body = JSON.stringify(config.body)
     }
-    const response = await fetch(`${baseUrl}${path}`, config)
-    if(!response.ok){
-        throw new Error(`Https error: ${response.status}`)
+    const timeout = setTimeout(() => {
+        controller.abort()
+    }, 8000)
+    try{
+        if(!navigator.onLine){
+            throw{
+                type: "offline", 
+                status: null,
+                message: "there is no internet connection"
+            }
+        }
+        const response = await fetch(`${baseUrl}${path}`, config)
+        if(!response.ok){
+            throw {
+                type: "http", 
+                status: response.status,
+                message: "an http error occured"
+            }
+        }
+
+        return await response.json()
     }
-    return response.json()
+    catch(error){
+        if(error instanceof TypeError){
+            throw{
+                type: "network",
+                status: null,
+                message: "Network error"
+            }
+        }
+        if(error instanceof SyntaxError){
+            throw{
+                type: 'parse',
+                status: null,
+                message: "invalide JSON response"
+            }
+        }
+        if(error.name === "AbortError"){
+            throw{
+                type: 'timeout',
+                status: null,
+                message: "timeout Error"
+            }
+
+        }
+        console.error(error)
+        throw error
+    }
+    finally{
+        clearTimeout(timeout)
+    }
 
 }
-// console.log(request(""))
+request("/articles").then(data=>console.log(data))
