@@ -1,3 +1,9 @@
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 #mainInfo{
     display: flex;
     gap: 10px;
@@ -33,4 +39,31 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+#articlesArea{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+.card{
+    border: 1px black solid;
+}
+#filterDialogue[open]{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+/*For Tablets*/
+@media (max-width: 744px){
+    #articlesArea{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+/*For Phones*/
+@media (max-width: 440px){
+    #articlesArea{
+        grid-template-columns: 1fr;
+    }
 }

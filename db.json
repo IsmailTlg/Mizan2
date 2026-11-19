@@ -44,7 +44,7 @@
   ],
   "reservations": [
     {
-      "id": "1",
+      "id": "v1",
       "client": "Ahmed Benali",
       "articleId": "3",
       "dateReservation": "2026-11-15",

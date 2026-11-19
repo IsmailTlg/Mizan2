@@ -250,7 +250,7 @@ ressayerBtn.addEventListener("click", function(){
     fetchinfo(currency.value)
     getYestdayPrice()
 })
-//////////START OF PART 2 
+ 
 async function request(path, options = {}){
     const baseUrl = "http://localhost:3000"
     const controller = new AbortController()

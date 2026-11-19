@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue</title>
+    <script src="js/catalogueScript.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <button><a href="index.html">Home</a></button>
+            <input type="text" placeholder="Rechercher un element" id="searchBar">
+            <button id="filterBtn">Filter</button>
+        </nav>
+    </header>
+    <main>
+        <section id="articlesArea">
+
+        </section>
+        <dialog id="filterDialogue">
+            <h2>FILTER TAB</h2>
+            <div>
+                <select name="Tri" id="Tri">
+                    <option value="">Tri</option>
+                    <option value="titre">par Titre</option>
+                    <option value="prix">par Prix</option>
+                    <option value="date">par Date</option>
+                </select>
+                <select name="direction" id="direction">
+                    <option value="">ascending</option>
+                    <option value="-">descending</option>
+                </select>
+            </div>
+            <select name="statut" id="statut">
+                <option value="">Statut(All)</option>
+                <option value="disponible">disponible</option>
+                <option value="reserve">reserve</option>
+                <option value="vendu">vendu</option>
+            </select>
+            <div>
+                <button id="annulerBtn">Annuler</button>
+                <button id="confirmerBtn">Filter</button>
+            </div>
+        </dialog>
+    </main>
+</body>
+</html>
