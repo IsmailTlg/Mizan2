@@ -112,3 +112,83 @@ confirmerBtn.addEventListener('click', function(){
     moduleFilter.close()
     render(`/articles?_sort=${order.value}${triType.value}&statut:contains=${statut.value}`)
 })
+//us-03
+const ajouterBtn = document.getElementById("ajouterBtn")
+const annulerBtnForm = document.getElementById("annulerBtnForm")
+const dialogForm = document.getElementById("dialogForm");
+const articlesForm = document.getElementById("articleForm")
+let id = 6; 
+articlesForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const errTitre = document.getElementById("errTitre")
+    const errDescription = document.getElementById("errDescription")
+    const errPrix = document.getElementById("errPrix")
+    const errStatut = document.getElementById("errStatut")
+    const errDate = document.getElementById("errDate")
+    const inputTitre = document.getElementById("inputTitre")
+    const inputDescription = document.getElementById("inputDescription")
+    const inputPrix = document.getElementById("inputPrix")
+    const inputStatut = document.getElementById("inputStatut")
+    const inputDate = document.getElementById("inputDate")
+    let isValid = true;
+    if(inputTitre.value.trim() == "" || inputTitre.value.trim().length < 3 || inputTitre.value.trim().length > 80){
+        errTitre.classList.remove("hide")
+        inputTitre.value = ""
+        isValid = false;
+    }
+    else{
+        errTitre.classList.add("hide")
+    }
+    if(inputDescription.value.trim() == "" || inputDescription.value.trim().length < 10){
+        errDescription.classList.remove("hide")
+        inputDescription.value = ""
+        isValid = false;
+    }
+    else{
+        errDescription.classList.add("hide")
+    }
+    if(inputPrix.value < 0 || inputPrix.value == ""){
+        errPrix.classList.remove("hide")
+        inputPrix.value = ""
+        isValid = false
+    }
+    else{
+        errPrix.classList.add("hide")
+    }
+    if(inputStatut.value != "disponible" && inputStatut.value != "reserve" && inputStatut.value != "vendu"){
+        errStatut.classList.remove('hide')
+        inputStatut.value = ""
+        isValid = false;
+    }
+    else{
+        errStatut.classList.add("hide")
+    }
+    if(inputDate.value == ""){
+        errDate.classList.remove('hide')
+        isValid = false
+    }
+    else{
+        errDate.classList.add('hide')
+    }
+    if(isValid){
+        request("/articles", {
+            method : 'POST',
+            body:{
+                id: id++,
+                titre: inputTitre.value,
+                description: inputDescription.value,
+                prix: inputPrix.value,
+                statut: inputStatut.value,
+                date: inputDate.value
+            }
+        })
+        dialogForm.close()
+    }
+})
+ajouterBtn.addEventListener('click', function(){
+    dialogForm.showModal()
+})
+annulerBtnForm.addEventListener("click", function(){
+    dialogForm.close()
+})
+

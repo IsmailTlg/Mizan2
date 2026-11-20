@@ -16,6 +16,7 @@
         </nav>
     </header>
     <main>
+        <button id="ajouterBtn">Ajouter un article</button>
         <section id="articlesArea">
 
         </section>
@@ -43,6 +44,39 @@
                 <button id="annulerBtn">Annuler</button>
                 <button id="confirmerBtn">Filter</button>
             </div>
+        </dialog>
+        <dialog id="dialogForm">
+            <form id="articleForm">
+                <div class="inputErrGrp">
+                    <input type="text" id="inputTitre" placeholder="Titre d'article">
+                    <p id="errTitre" class="hide redTxt">nombre des caracteres entre 3 et 80</p>
+                </div>
+                <div class="inputErrGrp">
+                    <input type="text" id="inputDescription" placeholder="Description d'article">
+                    <p id="errDescription" class="hide redTxt">nombre des caracteres doit etre au moins que 10</p>
+                </div>
+                <div class="inputErrGrp">
+                    <input type="number" id="inputPrix" placeholder="Prix en MAD">
+                    <p id="errPrix" class="hide redTxt">prix doit etre positive</p>
+                </div>
+                <div class="inputErrGrp"> 
+                    <select name="inputStatut" id="inputStatut">
+                        <option value="">statut d'article</option>
+                        <option value="disponible">disponible</option>
+                        <option value="reserve">reserve</option>
+                        <option value="vendu">vendu</option>
+                    </select>
+                    <p id="errStatut" class="hide redTxt">choisi un des 3 (disponible, reserve, vendu)</p>
+                </div>
+                <div>
+                    <input type="date" id="inputDate">
+                    <p id="errDate" class="hide redTxt">Invalid Date</p>
+                </div>
+                <div>
+                    <button type="button" id="annulerBtnForm">Annuler</button>
+                    <button type="submit" id="submitBtn">Ajouter</button>
+                </div>
+            </form>
         </dialog>
     </main>
 </body>
